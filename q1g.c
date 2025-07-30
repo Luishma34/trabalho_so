@@ -47,7 +47,6 @@ void *consumer(void *args) {
             pthread_cond_wait(&cond, &mutex);
         }
         if (count < BUFFER_SIZE) {
-            // Consumir parcial se houver itens restantes e produtores acabaram
             int num = count;
             if (num > 0) {
                 double sum = 0;
@@ -62,7 +61,6 @@ void *consumer(void *args) {
             }
             continue;
         }
-        // Consumir buffer cheio (5 itens)
         double sum = 0;
         for (int i = 0; i < BUFFER_SIZE; i++) sum += buffer[i];
         double avg = sum / BUFFER_SIZE;
